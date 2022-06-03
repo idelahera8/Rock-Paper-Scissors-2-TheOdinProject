@@ -1,8 +1,13 @@
+let roundWinner
+let playerScore = 0
+let computerScore = 0
+
+
 // computerSelect function selects randomly an option for the computer
 function computerSelect() {
     let randomNumber = createRandomNumber0to2()
     let computerOption = selectComputerOption(randomNumber)
-    console.log(computerOption)
+    console.log(`Computer: ${computerOption}`)
     return computerOption
 }
 
@@ -30,7 +35,7 @@ function playerSelect() {
     while (!checkPlayerSelection(playerSelection)) {
         playerSelection = prompt("Choose your option: Rock, Paper or Scissors")
     }
-    console.log(playerSelection)
+    console.log(`Player: ${playerSelection}`)
     return playerSelection
 }
 
@@ -49,8 +54,7 @@ function checkPlayerSelection(playerSelection) {
 function playRound() {
     let playerSelection = playerSelect()
     let computerSelection = computerSelect()
-    let roundWinner = checkRoundWinner(playerSelection, computerSelection)
-    return roundWinner
+    roundWinner = checkRoundWinner(playerSelection, computerSelection)
 }
 
 // This function checks who won the round
@@ -103,7 +107,39 @@ function checkRoundWinner(playerSelection, computerSelection) {
 function playGame() {
     let numberOfRounds = parseInt(prompt("How many rounds do you want to play?"))
     for (let i=1; i <= numberOfRounds; i++) {
-        let roundWinner = playRound()
+        console.log(`Round ${i}`)
+        playRound()
+        updateGameScore(roundWinner)
+        displayGameScore()
+    }
+    console.log(checkGameWinner())
+}
+
+// This updates the game Score
+function updateGameScore(roundWinner) {
+    if (roundWinner == "Player") {
+        playerScore++
+    }
+    else if (roundWinner == "Computer") {
+        computerScore++
+    }
+}
+
+// This displays the game score
+function displayGameScore() {
+    console.log(`The game score is Computer:${computerScore} vs Player:${playerScore}`)
+}
+
+// This function checks the gameWinner
+function checkGameWinner() {
+    if (playerScore == computerScore) {
+        return "Tied Game!!"
+    }
+    else if (playerScore > computerScore) {
+        return "Player Wins!!"
+    }
+    else {
+        return "Computer Wins!!"
     }
 }
 

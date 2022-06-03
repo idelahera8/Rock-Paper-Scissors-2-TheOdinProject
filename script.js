@@ -49,44 +49,62 @@ function checkPlayerSelection(playerSelection) {
 function playRound() {
     let playerSelection = playerSelect()
     let computerSelection = computerSelect()
-    console.log(checkWinner(playerSelection, computerSelection))
+    let roundWinner = checkRoundWinner(playerSelection, computerSelection)
+    return roundWinner
 }
 
-// This function checks who won
-function checkWinner(playerSelection, computerSelection) {
+// This function checks who won the round
+function checkRoundWinner(playerSelection, computerSelection) {
     if (playerSelection.toLowerCase() == "rock") {
         if (computerSelection.toLowerCase() == "rock") {
-            return "It's a tie! Rock vs Rock"
+            console.log("It's a tie for this round! Rock vs Rock")
+            return "Tie"
         }
         else if (computerSelection.toLowerCase() == "paper") {
-            return "Computer wins! Paper beats Rock"
+            console.log("Computer wins this round! Paper beats Rock")
+            return "Computer"
         }
         else {
-            return "Player wins! Rock beats Scissors"
+            console.log("Player wins this round! Rock beats Scissors")
+            return "Player"
         }
     }
     else if (playerSelection.toLowerCase() == "paper") {
         if (computerSelection.toLowerCase() == "rock") {
-            return "Player wins! Paper beats Rock"
+            console.log("Player wins this round! Paper beats Rock")
+            return "Player"
         }
         else if (computerSelection.toLowerCase() == "paper") {
-            return "It's a tie! Paper vs Paper"
+            console.log("It's a tie for this round! Paper vs Paper")
+            return "Tie"
         }
         else {
-            return "Computer wins! Scissors beats Paper"
+            console.log("Computer wins this round! Scissors beats Paper")
+            return "Computer"
         }
     }
     else {
         if (computerSelection.toLowerCase() == "rock") {
-            return "Computer wins! Rock beats Scissors"
+            console.log("Computer wins this round! Rock beats Scissors")
+            return "Computer"
         }
         else if (computerSelection.toLowerCase() == "paper") {
-            return "Player wins! Scissors beats Paper"
+            console.log("Player wins this round! Scissors beats Paper")
+            return "Player"
         }
         else {
-            return "It's a tie! Scissors vs Scissors"
+            console.log("It's a tie for this round! Scissors vs Scissors")
+            return "Tie"
         }
     }
 } 
 
-playRound()
+// This function starts a game
+function playGame() {
+    let numberOfRounds = parseInt(prompt("How many rounds do you want to play?"))
+    for (let i=1; i <= numberOfRounds; i++) {
+        let roundWinner = playRound()
+    }
+}
+
+playGame()
